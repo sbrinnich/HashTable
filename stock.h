@@ -36,6 +36,10 @@ class Stock {
     std::vector<PriceData> price_data;
 public:
     /**
+     * Creates an empty stock
+     */
+     Stock();
+    /**
      * Creates a new stock
      * @param name Stock name
      * @param member_code Short name of stock

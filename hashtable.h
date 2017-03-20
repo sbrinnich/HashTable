@@ -1,20 +1,28 @@
 #ifndef HASHTABLE_HASHTABLE_H
 #define HASHTABLE_HASHTABLE_H
 
+#include <vector>
 #include "stock.h"
 
 /**
  * Represents a HashTable for saving stock information
  */
 class HashTable {
-    // TODO: find data format to store stocks in
-    Stock stock[1999];
+    const static int array_size = 1999;
+    // Data format to store stocks in
+    std::vector<Stock*> stocks;
 
 public:
     /**
      * Creates a new HashTable
      */
     HashTable();
+    /**
+     * Hash function, which creates an integer value from a string
+     * @param str string to be hashed
+     * @return an integer value representing a hashed value of the given string
+     */
+    int hash(std::string str);
     /**
      * Puts a stock into the HashTable
      * @param stock Stock to be inserted
