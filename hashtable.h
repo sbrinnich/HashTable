@@ -8,6 +8,8 @@
  */
 class HashTable {
     // TODO: find data format to store stocks in
+    Stock stock[1999];
+
 public:
     /**
      * Creates a new HashTable
@@ -29,6 +31,7 @@ public:
      * @return Wanted stock, if found. Else it will return null
      */
     Stock search(std::string name);
+
 };
 
 #endif //HASHTABLE_HASHTABLE_H
