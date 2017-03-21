@@ -39,8 +39,13 @@ int HashTable::hash(std::string str) {
     return(sum % array_size);
 }
 
-void HashTable::add(Stock* stock) {
-    int hashed = hash(stock->getName());
+void HashTable::add(Stock* stock, int hash_by) {
+    int hashed = 0;
+    if(hash_by == HASH_BY_NAME) {
+        hashed = hash(stock->getName());
+    }else{
+        hashed = hash(stock->getMemberCode());
+    }
     if(stocks.at(hashed)->getName() == nullptr){
         stocks.at(hashed) = stock;
     }else{
@@ -53,10 +58,23 @@ void HashTable::add(Stock* stock) {
     }
 }
 
-void HashTable::remove(std::string name) {
-    // TODO: remove stock from hashtable
+void HashTable::remove(std::string name, int hash_by) {
+    // TODO: delete allocated memory
+    int hashed = hash(name);
+    if(hash_by == HASH_BY_NAME && stocks.at(hashed)->getName() == name ||
+            hash_by == HASH_BY_CODE && stocks.at(hashed)->getMemberCode() == name){
+        stocks.at(hashed) = new Stock();
+    }else{
+        for(int i = 1; i < 100; i++){
+            if(hash_by == HASH_BY_NAME && stocks.at((hashed+(int)pow(i,2))%array_size)->getName() == name ||
+                    hash_by == HASH_BY_CODE && stocks.at((hashed+(int)pow(i,2))%array_size)->getMemberCode() == name){
+                stocks.at((hashed+(int)pow(i,2))%array_size) = new Stock();
+                break;
+            }
+        }
+    }
 }
 
-Stock HashTable::search(std::string name) {
+Stock HashTable::search(std::string name, int hash_by) {
     // TODO: search stock in hashtable
 }

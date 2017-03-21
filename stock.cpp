@@ -21,3 +21,7 @@ void Stock::import_price_data(std::string filepath) {
 std::string Stock::getName() {
     return name;
 }
+
+std::string Stock::getMemberCode() {
+    return member_code;
+}

@@ -9,6 +9,8 @@
  */
 class HashTable {
     const static int array_size = 1999;
+    const static int HASH_BY_NAME = 0;
+    const static int HASH_BY_CODE = 1;
     // Data format to store stocks in
     std::vector<Stock*> stocks;
 
@@ -26,19 +28,22 @@ public:
     /**
      * Puts a stock into the HashTable
      * @param stock Stock to be inserted
+     * @param hash_by HASH_BY_NAME or HASH_BY_CODE
      */
-    void add(Stock* stock);
+    void add(Stock* stock, int hash_by);
     /**
      * Removes a stock from the HashTable
      * @param name Name of stock to be removed
+     * @param hash_by HASH_BY_NAME or HASH_BY_CODE
      */
-    void remove(std::string name);
+    void remove(std::string name, int hash_by);
     /**
      * Searches a stock in the HashTable and returns it if found
      * @param name Name of wanted stock
+     * @param hash_by HASH_BY_NAME or HASH_BY_CODE
      * @return Wanted stock, if found. Else it will return null
      */
-    Stock search(std::string name);
+    Stock search(std::string name, int hash_by);
 
 };
 

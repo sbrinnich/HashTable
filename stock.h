@@ -56,6 +56,11 @@ public:
      * @return a string containing the name
      */
     std::string getName();
+    /**
+     * Returns the member code of the stock
+     * @return a string containing the member code
+     */
+    std::string getMemberCode();
 };
 
 #endif //HASHTABLE_STOCK_H
