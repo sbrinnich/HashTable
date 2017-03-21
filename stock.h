@@ -33,7 +33,7 @@ class Stock {
     std::string member_code;
     // Security Identification Number
     int sin;
-    std::vector<PriceData> price_data;
+    std::vector<PriceData*> price_data;
 public:
     /**
      * Creates an empty stock
@@ -51,6 +51,11 @@ public:
      * @param filepath path to csv file (including filename + ending)
      */
     void import_price_data(std::string filepath);
+    /**
+     * Returns the name of the stock
+     * @return a string containing the name
+     */
+    std::string getName();
 };
 
 #endif //HASHTABLE_STOCK_H

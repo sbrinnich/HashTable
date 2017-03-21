@@ -1,4 +1,5 @@
 #include <string.h>
+#include <math.h>
 #include "hashtable.h"
 
 HashTable::HashTable() {
@@ -38,8 +39,18 @@ int HashTable::hash(std::string str) {
     return(sum % array_size);
 }
 
-void HashTable::add(Stock stock) {
-    // TODO: add stock to hashtable
+void HashTable::add(Stock* stock) {
+    int hashed = hash(stock->getName());
+    if(stocks.at(hashed)->getName() == nullptr){
+        stocks.at(hashed) = stock;
+    }else{
+        for(int i = 1; i < 100; i++){
+            if(stocks.at((hashed+(int)pow(i,2))%array_size)->getName() == nullptr){
+                stocks.at((hashed+(int)pow(i,2))%array_size) = stock;
+                break;
+            }
+        }
+    }
 }
 
 void HashTable::remove(std::string name) {

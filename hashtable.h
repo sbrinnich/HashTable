@@ -27,7 +27,7 @@ public:
      * Puts a stock into the HashTable
      * @param stock Stock to be inserted
      */
-    void add(Stock stock);
+    void add(Stock* stock);
     /**
      * Removes a stock from the HashTable
      * @param name Name of stock to be removed

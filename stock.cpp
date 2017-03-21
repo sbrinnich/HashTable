@@ -17,3 +17,7 @@ Stock::Stock() {
 void Stock::import_price_data(std::string filepath) {
     // TODO: import price data for 30 days from given csv file and save into vector price_data
 }
+
+std::string Stock::getName() {
+    return name;
+}
