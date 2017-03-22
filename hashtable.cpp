@@ -50,6 +50,7 @@ void HashTable::add(Stock* stock, int hash_by) {
         stocks.at(hashed) = stock;
     }else{
         int plus = 1;
+        int next_pos = 0;
         for(int i = 1; i <= array_size;){
             int x = (int)pow(i,2);
             if(!plus){
@@ -57,11 +58,12 @@ void HashTable::add(Stock* stock, int hash_by) {
                 i++;
             }
             plus = (plus+1)%2;
-            if((hashed+x)<0){
-                x = array_size-x;
+            next_pos = hashed+x;
+            if(next_pos<0){
+                next_pos = array_size-next_pos;
             }
-            if(stocks.at((hashed+x)%array_size)->getName() == nullptr){
-                stocks.at((hashed+x)%array_size) = stock;
+            if(stocks.at(next_pos%array_size)->getName() == nullptr){
+                stocks.at(next_pos%array_size) = stock;
                 break;
             }
         }
@@ -76,6 +78,7 @@ void HashTable::remove(std::string name, int hash_by) {
         stocks.at(hashed) = new Stock();
     }else{
         int plus = 1;
+        int next_pos = 0;
         for(int i = 1; i <= array_size;){
             int x = (int)pow(i,2);
             if(!plus){
@@ -83,12 +86,13 @@ void HashTable::remove(std::string name, int hash_by) {
                 i++;
             }
             plus = (plus+1)%2;
-            if((hashed+x)<0){
-                x = array_size-x;
+            next_pos = hashed+x;
+            if(next_pos<0){
+                next_pos = array_size-next_pos;
             }
-            if(hash_by == HASH_BY_NAME && stocks.at((hashed+x)%array_size)->getName() == name ||
-                    hash_by == HASH_BY_CODE && stocks.at((hashed+x)%array_size)->getMemberCode() == name){
-                stocks.at((hashed+x)%array_size) = new Stock();
+            if(hash_by == HASH_BY_NAME && stocks.at(next_pos%array_size)->getName() == name ||
+                    hash_by == HASH_BY_CODE && stocks.at(next_pos%array_size)->getMemberCode() == name){
+                stocks.at(next_pos%array_size) = new Stock();
                 break;
             }
         }
