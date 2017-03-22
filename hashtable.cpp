@@ -49,9 +49,19 @@ void HashTable::add(Stock* stock, int hash_by) {
     if(stocks.at(hashed)->getName() == nullptr){
         stocks.at(hashed) = stock;
     }else{
-        for(int i = 1; i < 100; i++){
-            if(stocks.at((hashed+(int)pow(i,2))%array_size)->getName() == nullptr){
-                stocks.at((hashed+(int)pow(i,2))%array_size) = stock;
+        int plus = 1;
+        for(int i = 1; i <= array_size;){
+            int x = (int)pow(i,2);
+            if(!plus){
+                x = (-1) * x;
+                i++;
+            }
+            plus = (plus+1)%2;
+            if((hashed+x)<0){
+                x = array_size-x;
+            }
+            if(stocks.at((hashed+x)%array_size)->getName() == nullptr){
+                stocks.at((hashed+x)%array_size) = stock;
                 break;
             }
         }
@@ -65,10 +75,20 @@ void HashTable::remove(std::string name, int hash_by) {
             hash_by == HASH_BY_CODE && stocks.at(hashed)->getMemberCode() == name){
         stocks.at(hashed) = new Stock();
     }else{
-        for(int i = 1; i < 100; i++){
-            if(hash_by == HASH_BY_NAME && stocks.at((hashed+(int)pow(i,2))%array_size)->getName() == name ||
-                    hash_by == HASH_BY_CODE && stocks.at((hashed+(int)pow(i,2))%array_size)->getMemberCode() == name){
-                stocks.at((hashed+(int)pow(i,2))%array_size) = new Stock();
+        int plus = 1;
+        for(int i = 1; i <= array_size;){
+            int x = (int)pow(i,2);
+            if(!plus){
+                x = (-1) * x;
+                i++;
+            }
+            plus = (plus+1)%2;
+            if((hashed+x)<0){
+                x = array_size-x;
+            }
+            if(hash_by == HASH_BY_NAME && stocks.at((hashed+x)%array_size)->getName() == name ||
+                    hash_by == HASH_BY_CODE && stocks.at((hashed+x)%array_size)->getMemberCode() == name){
+                stocks.at((hashed+x)%array_size) = new Stock();
                 break;
             }
         }
