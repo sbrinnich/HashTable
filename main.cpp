@@ -41,11 +41,11 @@ int main() {
             if(name.length() > 4) {
                 s = table_names->search(name, HashTable::HASH_BY_NAME);
             }else{
-                s = table_names->search(name, HashTable::HASH_BY_CODE);
+                s = table_codes->search(name, HashTable::HASH_BY_CODE);
             }
             if(s == nullptr){
                 if(name.length() > 4) {
-                    s = table_names->search(name, HashTable::HASH_BY_CODE);
+                    s = table_codes->search(name, HashTable::HASH_BY_CODE);
                 }else{
                     s = table_names->search(name, HashTable::HASH_BY_NAME);
                 }
@@ -59,7 +59,29 @@ int main() {
         }else if(in.compare("IMPORT") == 0){
 
         }else if(in.compare("SEARCH") == 0){
-
+            std::string name;
+            std::cout << "Name/Member Code: ";
+            std::cin >> name;
+            Stock *s;
+            if(name.length() > 4) {
+                s = table_names->search(name, HashTable::HASH_BY_NAME);
+            }else{
+                s = table_codes->search(name, HashTable::HASH_BY_CODE);
+            }
+            if(s == nullptr){
+                if(name.length() > 4) {
+                    s = table_codes->search(name, HashTable::HASH_BY_CODE);
+                }else{
+                    s = table_names->search(name, HashTable::HASH_BY_NAME);
+                }
+            }
+            if(s != nullptr) {
+                std::cout << "NAME: " << s->getName() << std::endl;
+                std::cout << "MEMBER CODE: " << s->getMemberCode() << std::endl;
+                std::cout << "SIN: " << s->getSIN() << std::endl;
+            }else{
+                std::cout << "Could not delete stock! (Not found)";
+            }
         }else if(in.compare("PLOT") == 0){
 
         }else if(in.compare("SAVE") == 0){

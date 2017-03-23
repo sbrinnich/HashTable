@@ -61,6 +61,11 @@ public:
      * @return a string containing the member code
      */
     std::string getMemberCode();
+    /**
+     * Returns the security identification number of the stock
+     * @return an int containing the sin
+     */
+    int getSIN();
 };
 
 #endif //HASHTABLE_STOCK_H

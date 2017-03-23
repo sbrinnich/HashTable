@@ -25,3 +25,7 @@ std::string Stock::getName() {
 std::string Stock::getMemberCode() {
     return member_code;
 }
+
+int Stock::getSIN() {
+    return sin;
+}
