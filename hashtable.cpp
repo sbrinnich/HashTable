@@ -113,4 +113,5 @@ Stock* HashTable::search(std::string name, int hash_by) {
             }
         }
     }
+    return nullptr;
 }
