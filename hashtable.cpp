@@ -92,4 +92,25 @@ void HashTable::remove(std::string name, int hash_by) {
 
 Stock* HashTable::search(std::string name, int hash_by) {
     // TODO: search stock in hashtable
+    int hashed = hash(name);
+    if((hash_by == HASH_BY_NAME && stocks[hashed]->getName() == name) ||
+       (hash_by == HASH_BY_CODE && stocks[hashed]->getMemberCode() == name)){
+        return stocks[hashed];
+    }else{
+        int plus = 1;
+        int next_pos = 0;
+        for(int i = 1; i <= array_size;){
+            int x = (int)pow(i,2);
+            if(!plus){
+                x = (-1) * x;
+                i++;
+            }
+            plus = (plus+1)%2;
+            next_pos = ((hashed+x) % array_size + array_size) % array_size ;
+            if(hash_by == HASH_BY_NAME && stocks[next_pos]->getName() == name ||
+               hash_by == HASH_BY_CODE && stocks[next_pos]->getMemberCode() == name){
+                return stocks[next_pos];
+            }
+        }
+    }
 }
