@@ -1,7 +1,6 @@
 #ifndef HASHTABLE_HASHTABLE_H
 #define HASHTABLE_HASHTABLE_H
 
-#include <vector>
 #include "stock.h"
 
 /**
@@ -12,7 +11,7 @@ class HashTable {
     const static int HASH_BY_NAME = 0;
     const static int HASH_BY_CODE = 1;
     // Data format to store stocks in
-    std::vector<Stock*> stocks;
+    Stock* stocks[array_size];
 
 public:
     /**

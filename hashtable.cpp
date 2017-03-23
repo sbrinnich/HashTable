@@ -3,10 +3,8 @@
 #include "hashtable.h"
 
 HashTable::HashTable() {
-    stocks.reserve(array_size);
     for(int i = 0; i < array_size; i++){
-        Stock *s = new Stock();
-        stocks.push_back(s);
+        stocks[i] = nullptr;
     }
 }
 
@@ -34,8 +32,6 @@ int HashTable::hash(std::string str) {
         mult *= 256;
     }
 
-    //std::cout << sum % 4 ;
-
     return(sum % array_size);
 }
 
@@ -46,8 +42,8 @@ void HashTable::add(Stock* stock, int hash_by) {
     }else{
         hashed = hash(stock->getMemberCode());
     }
-    if(stocks.at(hashed)->getName() == nullptr){
-        stocks.at(hashed) = stock;
+    if(stocks[hashed] == nullptr){
+        stocks[hashed] = stock;
     }else{
         int plus = 1;
         int next_pos = 0;
@@ -62,8 +58,8 @@ void HashTable::add(Stock* stock, int hash_by) {
             if(next_pos<0){
                 next_pos = array_size-next_pos;
             }
-            if(stocks.at(next_pos%array_size)->getName() == nullptr){
-                stocks.at(next_pos%array_size) = stock;
+            if(stocks[next_pos%array_size] == nullptr){
+                stocks[next_pos%array_size] = stock;
                 break;
             }
         }
@@ -73,9 +69,10 @@ void HashTable::add(Stock* stock, int hash_by) {
 void HashTable::remove(std::string name, int hash_by) {
     // TODO: delete allocated memory
     int hashed = hash(name);
-    if(hash_by == HASH_BY_NAME && stocks.at(hashed)->getName() == name ||
-            hash_by == HASH_BY_CODE && stocks.at(hashed)->getMemberCode() == name){
-        stocks.at(hashed) = new Stock();
+    if((hash_by == HASH_BY_NAME && stocks[hashed]->getName() == name) ||
+            (hash_by == HASH_BY_CODE && stocks[hashed]->getMemberCode() == name)){
+        delete stocks[hashed];
+        stocks[hashed] = nullptr;
     }else{
         int plus = 1;
         int next_pos = 0;
@@ -90,9 +87,10 @@ void HashTable::remove(std::string name, int hash_by) {
             if(next_pos<0){
                 next_pos = array_size-next_pos;
             }
-            if(hash_by == HASH_BY_NAME && stocks.at(next_pos%array_size)->getName() == name ||
-                    hash_by == HASH_BY_CODE && stocks.at(next_pos%array_size)->getMemberCode() == name){
-                stocks.at(next_pos%array_size) = new Stock();
+            if((hash_by == HASH_BY_NAME && stocks[next_pos%array_size]->getName() == name) ||
+                    (hash_by == HASH_BY_CODE && stocks[next_pos%array_size]->getMemberCode() == name)){
+                delete stocks[next_pos%array_size];
+                stocks[next_pos%array_size] = nullptr;
                 break;
             }
         }
