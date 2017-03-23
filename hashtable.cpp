@@ -55,8 +55,8 @@ void HashTable::add(Stock* stock, int hash_by) {
             }
             plus = (plus+1)%2;
             next_pos = ((hashed+x)% array_size + array_size) % array_size ;
-            if(stocks.at(next_pos) == nullptr){
-                stocks.at(next_pos) = stock;
+            if(stocks[next_pos] == nullptr){
+                stocks[next_pos] = stock;
                 break;
             }
         }
