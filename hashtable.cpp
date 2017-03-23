@@ -64,7 +64,6 @@ void HashTable::add(Stock* stock, int hash_by) {
 }
 
 void HashTable::remove(std::string name, int hash_by) {
-    // TODO: delete allocated memory
     int hashed = hash(name);
     if((hash_by == HASH_BY_NAME && stocks[hashed]->getName() == name) ||
             (hash_by == HASH_BY_CODE && stocks[hashed]->getMemberCode() == name)){
@@ -83,8 +82,8 @@ void HashTable::remove(std::string name, int hash_by) {
             next_pos = ((hashed+x) % array_size + array_size) % array_size ;
             if(hash_by == HASH_BY_NAME && stocks[next_pos]->getName() == name ||
                     hash_by == HASH_BY_CODE && stocks[next_pos]->getMemberCode() == name){
-                delete stocks[next_pos%array_size];
-                stocks[next_pos%array_size] = nullptr;
+                delete stocks[next_pos];
+                stocks[next_pos] = nullptr;
                 break;
             }
         }
