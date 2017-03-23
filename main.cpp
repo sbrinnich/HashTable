@@ -80,7 +80,7 @@ int main() {
                 std::cout << "MEMBER CODE: " << s->getMemberCode() << std::endl;
                 std::cout << "SIN: " << s->getSIN() << std::endl;
             }else{
-                std::cout << "Could not delete stock! (Not found)";
+                std::cout << "Could not find stock!";
             }
         }else if(in.compare("PLOT") == 0){
 
