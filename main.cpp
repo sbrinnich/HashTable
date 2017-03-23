@@ -54,11 +54,11 @@ int main() {
                 if(name.length() > 4){
                     table_names->remove(s->getName(), HashTable::HASH_BY_NAME);
                     table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
-                    std::cout << s->getName() << " removed" << std::endl;
+                    std::cout << s->getName() << " removed!" << std::endl;
                 }else{
                     table_names->remove(s->getName(), HashTable::HASH_BY_NAME);
                     table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
-                    std::cout << s->getMemberCode() << " removed" << std::endl;
+                    std::cout << s->getMemberCode() << " removed!" << std::endl;
                 }
 
 
