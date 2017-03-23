@@ -8,12 +8,12 @@
  */
 class HashTable {
     const static int array_size = 1999;
-    const static int HASH_BY_NAME = 0;
-    const static int HASH_BY_CODE = 1;
     // Data format to store stocks in
     Stock* stocks[array_size];
 
 public:
+    const static int HASH_BY_NAME = 0;
+    const static int HASH_BY_CODE = 1;
     /**
      * Creates a new HashTable
      */
@@ -42,7 +42,7 @@ public:
      * @param hash_by HASH_BY_NAME or HASH_BY_CODE
      * @return Wanted stock, if found. Else it will return null
      */
-    Stock search(std::string name, int hash_by);
+    Stock* search(std::string name, int hash_by);
 
 };
 

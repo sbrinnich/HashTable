@@ -90,6 +90,6 @@ void HashTable::remove(std::string name, int hash_by) {
     }
 }
 
-Stock HashTable::search(std::string name, int hash_by) {
+Stock* HashTable::search(std::string name, int hash_by) {
     // TODO: search stock in hashtable
 }
