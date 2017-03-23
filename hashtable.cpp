@@ -58,12 +58,9 @@ void HashTable::add(Stock* stock, int hash_by) {
                 i++;
             }
             plus = (plus+1)%2;
-            next_pos = hashed+x;
-            if(next_pos<0){
-                next_pos = array_size-next_pos;
-            }
-            if(stocks.at(next_pos%array_size)->getName() == nullptr){
-                stocks.at(next_pos%array_size) = stock;
+            next_pos = ((hashed+x)% array_size + array_size) % array_size ;
+            if(stocks.at(next_pos)->getName() == nullptr){
+                stocks.at(next_pos) = stock;
                 break;
             }
         }
@@ -86,13 +83,10 @@ void HashTable::remove(std::string name, int hash_by) {
                 i++;
             }
             plus = (plus+1)%2;
-            next_pos = hashed+x;
-            if(next_pos<0){
-                next_pos = array_size-next_pos;
-            }
-            if(hash_by == HASH_BY_NAME && stocks.at(next_pos%array_size)->getName() == name ||
-                    hash_by == HASH_BY_CODE && stocks.at(next_pos%array_size)->getMemberCode() == name){
-                stocks.at(next_pos%array_size) = new Stock();
+            next_pos = ((hashed+x) % array_size + array_size) % array_size ;
+            if(hash_by == HASH_BY_NAME && stocks.at(next_pos)->getName() == name ||
+                    hash_by == HASH_BY_CODE && stocks.at(next_pos)->getMemberCode() == name){
+                stocks.at(next_pos) = new Stock();
                 break;
             }
         }
