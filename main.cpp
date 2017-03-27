@@ -56,6 +56,17 @@ int main() {
             std::cin >> name;
             Stock *s = searchStock(name, table_names, table_codes);
             if(s != nullptr) {
+                if(name.length() > 4){
+                    table_names->remove(s->getName(), HashTable::HASH_BY_NAME);
+                    table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
+                    std::cout << s->getName() << " removed!" << std::endl;
+                }else{
+                    table_names->remove(s->getName(), HashTable::HASH_BY_NAME);
+                    table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
+                    std::cout << s->getMemberCode() << " removed!" << std::endl;
+                }
+
+
                 table_names->remove(s->getName(), HashTable::HASH_BY_NAME);
                 table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
                 std::cout << name << " successfully removed!" << std::endl;

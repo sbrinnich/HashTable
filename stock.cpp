@@ -5,7 +5,9 @@ PriceData::PriceData(std::string date, double open, double high, double low, dou
 }
 
 Stock::Stock(std::string name, std::string member_code, int sin) : name(name), member_code(member_code), sin(sin) {
-    price_data.reserve(30);
+    for(int i = 0; i < 30 ; i++){
+        price_data[i] = nullptr;
+    }
 }
 
 Stock::Stock() {
@@ -16,6 +18,8 @@ Stock::Stock() {
 
 void Stock::import_price_data(std::string filepath) {
     // TODO: import price data for 30 days from given csv file and save into vector price_data
+
+
 }
 
 std::string Stock::getName() {

@@ -33,7 +33,7 @@ class Stock {
     std::string member_code;
     // Security Identification Number
     int sin;
-    std::vector<PriceData*> price_data;
+    PriceData* price_data[30];
 public:
     /**
      * Creates an empty stock
