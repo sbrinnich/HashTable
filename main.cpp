@@ -63,6 +63,19 @@ int main() {
                 std::cout << "Could not delete stock! (Not found)";
             }
         }else if(in.compare("IMPORT") == 0){
+            std::string name;
+            std::cout << "Name/Member Code: ";
+            std::cin >> name;
+            Stock* s = searchStock(name, table_names, table_codes);
+            if(s != nullptr) {
+                std::string filepath;
+                std::cout << "Filepath: ";
+                std::cin >> filepath;
+                s->import_price_data(filepath);
+                std::cout << "Import successful!" << std::endl;
+            }else{
+                std::cout << "Could not find stock!"  << std::endl;
+            }
 
         }else if(in.compare("SEARCH") == 0){
             std::string name;
