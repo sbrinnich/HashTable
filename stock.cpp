@@ -24,34 +24,36 @@ Stock::Stock() {
 }
 
 void Stock::import_price_data(std::string filepath) {
-    // TODO: import price data for 30 days from given csv file and save into vector price_data
     std::string date, open, high, low, close, volume, adj_close;
     double open_d, high_d, low_d, close_d, adj_close_d;
     int volume_d;
-    std::ifstream datei;
-    datei.open(filepath, std::ios::in);
-    getline(datei, date, '\n');
+    std::ifstream datei;                                    //erzeuge ifstream
+    datei.open(filepath, std::ios::in);                     //öffne date mit übergebenen dateipfad
+    getline(datei, date, '\n');                             //Lese erste Zeile aus
     for (int i = 0; i < 30; ++i) {
-        getline(datei, date, ',');
+        getline(datei, date, ',');                          // übertrage die Daten in der richtigen Reihenfolge auf die erzeugten strings
         getline(datei, open, ',');
         getline(datei, high, ',');
         getline(datei, low, ',');
         getline(datei, close, ',');
         getline(datei, volume, ',');
         getline(datei, adj_close, '\n');
-        std::stringstream open_s(open);
+        std::stringstream open_s(open);                      //erzeuge stringstreams aus allen eingelesenen Daten um sie in doubles/ints konvertieren zu können.
         std::stringstream high_s(high);
         std::stringstream low_s(low);
         std::stringstream close_s(close);
         std::stringstream volume_s(volume);
         std::stringstream adj_close_s(adj_close);
-        open_s >> open_d;
+        open_s >> open_d;                                    //konvertiere stringstreams in korrektes dateiformat
         high_s >> high_d;
         low_s >> low_d;
         close_s >> close_d;
         adj_close_s >> adj_close_d;
         volume_s >> volume_d;
-        if(!open_s.fail() && !high_s.fail() && !low_s.fail() && !close_s.fail() && !adj_close_s.fail() && !volume_s.fail()) {
+        if(!open_s.fail() && !high_s.fail() && !low_s.fail() && !close_s.fail() && !adj_close_s.fail() && !volume_s.fail()) { //erstelle neues Objekt und übergebe die daten
+            if(price_data[i] != nullptr) {
+                delete price_data[i];
+            }
             price_data[i] = new PriceData(date, open_d, high_d, low_d, close_d, volume_d, adj_close_d);
         }
     }

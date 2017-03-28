@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sstream>
-
 #include "hashtable.h"
 
 Stock* searchStock(std::string name, HashTable* table_names, HashTable* table_codes){
