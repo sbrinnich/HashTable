@@ -85,7 +85,7 @@ int main() {
                 std::cout << "NAME: " << s->getName() << std::endl;
                 std::cout << "MEMBER CODE: " << s->getMemberCode() << std::endl;
                 std::cout << "SIN: " << s->getSIN() << std::endl;
-                //TODO: plot latest price data
+                std::cout << "High: " << s->getPriceData() << std::endl;
             }else{
                 std::cout << "Could not find stock!";
             }

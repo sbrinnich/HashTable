@@ -7,9 +7,10 @@ PriceData::PriceData(std::string date, double open, double high, double low, dou
         : date(date), open(open), high(high), low(low), close(close), volume(volume), adj_close(adj_close) {
 }
 
-std::string PriceData::get_date() {
-    return date;
+double PriceData::getHigh() {
+    return high;
 }
+
 
 Stock::Stock(std::string name, std::string member_code, int sin) : name(name), member_code(member_code), sin(sin) {
     for (int i = 0; i < 30; i++) {
@@ -57,9 +58,6 @@ void Stock::import_price_data(std::string filepath) {
             price_data[i] = new PriceData(date, open_d, high_d, low_d, close_d, volume_d, adj_close_d);
         }
     }
-
-
-
 }
 
 std::string Stock::getName() {
@@ -72,4 +70,8 @@ std::string Stock::getMemberCode() {
 
 int Stock::getSIN() {
     return sin;
+}
+
+double Stock::getPriceData() {
+    return price_data[0]->getHigh();
 }

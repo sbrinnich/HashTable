@@ -23,7 +23,8 @@ public:
      * @param adj_close Adjusted close value of given day
      */
     PriceData(std::string date, double open, double high, double low, double close, int volume, double adj_close);
-    std::string get_date();
+
+    double getHigh();
 };
 
 /**
@@ -67,6 +68,8 @@ public:
      * @return an int containing the sin
      */
     int getSIN();
+
+    double getPriceData();
 };
 
 #endif //HASHTABLE_STOCK_H
