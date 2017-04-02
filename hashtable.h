@@ -43,6 +43,16 @@ public:
      * @return Wanted stock, if found. Else it will return null
      */
     Stock* search(std::string name, int hash_by);
+    /**
+     * Saves the complete HashTable into a file
+     * @param filepath the path (+filename) where it should be saved
+     */
+    void saveToFile(std::string filepath);
+    /**
+     * Reads a complete HashTable from a file
+     * @param filepath the path (+filename) from where it should be read
+     */
+    void readFromFile(std::string filepath);
 
 };
 

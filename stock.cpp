@@ -7,8 +7,32 @@ PriceData::PriceData(std::string date, double open, double high, double low, dou
         : date(date), open(open), high(high), low(low), close(close), volume(volume), adj_close(adj_close) {
 }
 
+std::string PriceData::getDate() {
+    return date;
+}
+
+double PriceData::getOpen() {
+    return open;
+}
+
 double PriceData::getHigh() {
     return high;
+}
+
+double PriceData::getLow() {
+    return low;
+}
+
+double PriceData::getClose() {
+    return close;
+}
+
+int PriceData::getVolume() {
+    return volume;
+}
+
+double PriceData::getAdjClose() {
+    return adj_close;
 }
 
 
@@ -25,13 +49,18 @@ Stock::Stock() {
 }
 
 void Stock::import_price_data(std::string filepath) {
+    std::ifstream file(filepath, std::ios::in);
+    std::string line;
+    int line_numbers = 0;
+    for (; std::getline(file, line); line_numbers++);
+
     std::string date, open, high, low, close, volume, adj_close;
     double open_d, high_d, low_d, close_d, adj_close_d;
     int volume_d;
     std::ifstream datei;                                    //erzeuge ifstream
     datei.open(filepath, std::ios::in);                     //öffne date mit übergebenen dateipfad
     getline(datei, date, '\n');                             //Lese erste Zeile aus
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 30 && i < line_numbers-1; ++i) {
         getline(datei, date, ',');                          // übertrage die Daten in der richtigen Reihenfolge auf die erzeugten strings
         getline(datei, open, ',');
         getline(datei, high, ',');
@@ -72,6 +101,12 @@ int Stock::getSIN() {
     return sin;
 }
 
-double Stock::getPriceData() {
-    return price_data[0]->getHigh();
+PriceData** Stock::getPriceData() {
+    return price_data;
+}
+
+void Stock::setPriceData(PriceData **data) {
+    for(int i = 0; i < 30; i++){
+        price_data[i] = data[i];
+    }
 }

@@ -85,7 +85,10 @@ int main() {
                 std::cout << "NAME: " << s->getName() << std::endl;
                 std::cout << "MEMBER CODE: " << s->getMemberCode() << std::endl;
                 std::cout << "SIN: " << s->getSIN() << std::endl;
-                std::cout << "High: " << s->getPriceData() << std::endl;
+                PriceData* data = s->getPriceData()[0];
+                if(data != nullptr) {
+                    std::cout << "High: " << data->getHigh() << std::endl;
+                }
             }else{
                 std::cout << "Could not find stock!";
             }
@@ -100,9 +103,15 @@ int main() {
                 std::cout << "Could not find stock!";
             }
         }else if(in.compare("SAVE") == 0){
-
+            std::cout << "Saving to file..." << std::endl;
+            table_names->saveToFile("hashtable_names.txt");
+            table_codes->saveToFile("hashtable_codes.txt");
+            std::cout << "Saved!" << std::endl;
         }else if(in.compare("LOAD") == 0){
-
+            std::cout << "Reading from file..." << std::endl;
+            table_names->readFromFile("hashtable_names.txt");
+            table_codes->readFromFile("hashtable_codes.txt");
+            std::cout << "Finished!" << std::endl;
         }
     }
 

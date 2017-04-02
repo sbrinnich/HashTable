@@ -23,8 +23,42 @@ public:
      * @param adj_close Adjusted close value of given day
      */
     PriceData(std::string date, double open, double high, double low, double close, int volume, double adj_close);
-
+    /**
+     * Returns the date of this PriceData
+     * @return a string containing the date
+     */
+    std::string getDate();
+    /**
+     * Returns the open value of this PriceData
+     * @return a double containing the open value
+     */
+    double getOpen();
+    /**
+     * Returns the high value of this PriceData
+     * @return a double containing the high value
+     */
     double getHigh();
+    /**
+     * Returns the low value of this PriceData
+     * @return a double containing the low value
+     */
+    double getLow();
+    /**
+     * Returns the close value of this PriceData
+     * @return a double containing the close value
+     */
+    double getClose();
+    /**
+     * Returns the volume value of this PriceData
+     * @return an int containing the volume value
+     */
+    int getVolume();
+    /**
+     * Returns the adjusted close value of this PriceData
+     * @return a double containing the adjusted close value
+     */
+    double getAdjClose();
+
 };
 
 /**
@@ -68,8 +102,16 @@ public:
      * @return an int containing the sin
      */
     int getSIN();
-
-    double getPriceData();
+    /**
+     * Returns the PriceData Array of the stock
+     * @return an array of PriceData Pointer of length 30
+     */
+    PriceData** getPriceData();
+    /**
+     * Sets the PriceData Array
+     * @param data an array of PriceData Pointer of length 30
+     */
+    void setPriceData(PriceData** data);
 };
 
 #endif //HASHTABLE_STOCK_H
