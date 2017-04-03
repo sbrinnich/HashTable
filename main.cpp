@@ -22,15 +22,31 @@ Stock* searchStock(std::string name, HashTable* table_names, HashTable* table_co
     return s;
 }
 
+void printMenuInfo(){
+    std::cout << "==============================" << std::endl;
+    std::cout << "1 ... Add stock" << std::endl;
+    std::cout << "2 ... Search stock" << std::endl;
+    std::cout << "3 ... Delete stock" << std::endl;
+    std::cout << "4 ... Import price data from file" << std::endl;
+    std::cout << "5 ... Plot price data of a stock" << std::endl;
+    std::cout << "6 ... Save hashtable to file" << std::endl;
+    std::cout << "7 ... Load hashtable from file" << std::endl;
+    std::cout << "8 ... Quit program" << std::endl;
+    std::cout << "------------------------------" << std::endl;
+}
+
 int main() {
 
     std::string in = "";
     HashTable *table_names = new HashTable();
     HashTable *table_codes = new HashTable();
 
-    while(in.compare("QUIT") != 0){
+    // QUIT if input is 8
+    while(in.compare("8") != 0){
+        printMenuInfo();
         std::cin >> in;
-        if(in.compare("ADD") == 0){
+        if(in.compare("1") == 0){
+            // ADD
             std::string name, member_code, sin_s;
             int sin;
             std::cout << "Name: ";
@@ -52,7 +68,8 @@ int main() {
             Stock *stock = new Stock(name, member_code, sin);
             table_names->add(stock, HashTable::HASH_BY_NAME);
             table_codes->add(stock, HashTable::HASH_BY_CODE);
-        }else if(in.compare("DEL") == 0){
+        }else if(in.compare("3") == 0){
+            // DELETE
             std::string name;
             std::cout << "Name/Member Code: ";
             std::cin >> name;
@@ -64,7 +81,8 @@ int main() {
             }else{
                 std::cout << "Could not delete stock! (Not found)";
             }
-        }else if(in.compare("IMPORT") == 0){
+        }else if(in.compare("4") == 0){
+            // IMPORT
             std::string name;
             std::cout << "Name/Member Code: ";
             std::cin >> name;
@@ -79,7 +97,8 @@ int main() {
                 std::cout << "Could not find stock!"  << std::endl;
             }
 
-        }else if(in.compare("SEARCH") == 0){
+        }else if(in.compare("2") == 0){
+            // SEARCH
             std::string name;
             std::cout << "Name/Member Code: ";
             std::cin >> name;
@@ -91,11 +110,14 @@ int main() {
                 PriceData* data = s->getPriceData()[0];
                 if(data != nullptr) {
                     std::cout << "High: " << data->getHigh() << std::endl;
+                }else{
+                    std::cout << "No price data found" << std::endl;
                 }
             }else{
                 std::cout << "Could not find stock!";
             }
-        }else if(in.compare("PLOT") == 0){
+        }else if(in.compare("5") == 0){
+            // PLOT
             std::string name;
             std::cout << "Name/Member Code: ";
             std::cin >> name;
@@ -145,12 +167,14 @@ int main() {
             }else{
                 std::cout << "Could not find stock!";
             }
-        }else if(in.compare("SAVE") == 0){
+        }else if(in.compare("6") == 0){
+            // SAVE
             std::cout << "Saving to file..." << std::endl;
             table_names->saveToFile("hashtable_names.txt");
             table_codes->saveToFile("hashtable_codes.txt");
             std::cout << "Saved!" << std::endl;
-        }else if(in.compare("LOAD") == 0){
+        }else if(in.compare("7") == 0){
+            // LOAD
             std::cout << "Reading from file..." << std::endl;
             table_names->readFromFile("hashtable_names.txt");
             table_codes->readFromFile("hashtable_codes.txt");
