@@ -122,11 +122,12 @@ int main() {
                 for (int j = steps; j > 0; j--) {
                     for (int i = 0; i < entries; ++i)
                         if (arr[i] >= j)
-                            std::cout << " # ";
+                            std::cout << "#";
                         else
-                            std::cout << "   ";
+                            std::cout << " ";
                     std::cout << " " << j*adjust << std::endl;
                 }
+                /**
                 int count = 30;
                 for (int j = entries; j > 0; j--) {
                     if(count < 10) {
@@ -136,6 +137,13 @@ int main() {
                     }
                     count --;
                 }
+                 **/
+                auto plot_numbers = [&](const std::vector<int>& in) {
+                    for (auto& i : in) std::cout << i;
+                    std::cout << std::endl;
+                };
+                plot_numbers({0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3});
+                plot_numbers({1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0});
 
 
 
