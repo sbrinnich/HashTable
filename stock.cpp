@@ -85,7 +85,8 @@ void Stock::import_price_data(std::string filepath) {
         close_s >> close_d;
         adj_close_s >> adj_close_d;
         volume_s >> volume_d;
-        if(!open_s.fail() && !high_s.fail() && !low_s.fail() && !close_s.fail() && !adj_close_s.fail() && !volume_s.fail()) { //erstelle neues Objekt und übergebe die daten
+        //create new object and write correct values into it
+        if(!open_s.fail() && !high_s.fail() && !low_s.fail() && !close_s.fail() && !adj_close_s.fail() && !volume_s.fail()) {
             if(price_data[i] != nullptr) {
                 delete price_data[i];
             }
