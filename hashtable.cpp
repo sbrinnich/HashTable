@@ -14,11 +14,11 @@ int HashTable::hash(std::string str) {
     int intLength = str.length() / 4;
     long sum = 0;
     for (int j = 0; j < intLength; j++) {
-        char c[5];
+        char c[4];
         std::string tmp = str.substr(j * 4, (j * 4) + 4);
         strcpy(c, tmp.c_str());
         long mult = 1;
-        for (int k = 0; k < 5; k++) {
+        for (int k = 0; k < 4; k++) {
             sum += c[k] * mult;
             mult *= 256;
         }
@@ -34,7 +34,9 @@ int HashTable::hash(std::string str) {
         mult *= 256;
     }
 
-    return(sum % array_size);
+    sum = (sum % array_size + array_size) % array_size;
+
+    return(sum);
 }
 
 void HashTable::add(Stock* stock, int hash_by) {
