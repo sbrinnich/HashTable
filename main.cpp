@@ -1,6 +1,9 @@
 #include <iostream>
 #include <sstream>
+#include <array>
+#include <iomanip>
 #include "hashtable.h"
+
 
 Stock* searchStock(std::string name, HashTable* table_names, HashTable* table_codes){
     Stock *s = nullptr;
@@ -98,57 +101,40 @@ int main() {
             std::cin >> name;
             Stock* s = searchStock(name, table_names, table_codes);
             if(s != nullptr) {
-                int temp_price = 0;
-                int column_count = 0;
-                int height = 0;
-                for (int i = 0; i < 30; i++){
-                    if(s->getPriceData()[i] != nullptr){
-                        column_count ++;
+                constexpr size_t entries = 30;
+                constexpr size_t steps   = 25;
+                std::array<int, entries> arr;
+                double max = 0;
+                PriceData* data = nullptr;
+                for (int i = 0; i < entries; ++i) {
+                    data = s->getPriceData()[i];
+                    if (data)
+                        max = std::max(max, data->getHigh());
+                }
+                //
+                auto adjust = max / steps;
+                for (int i = 0; i < entries; ++i) {
+                    data = s->getPriceData()[i];
+                    arr[i] = (data != nullptr) ? data->getHigh() / adjust : 0;
+                }
+                // plot
+                std::cout << "\n" << std::endl; // clear new line...
+                for (int j = steps; j > 0; j--) {
+                    for (int i = 0; i < entries; ++i)
+                        if (arr[i] >= j)
+                            std::cout << " # ";
+                        else
+                            std::cout << "   ";
+                    std::cout << " " << j*adjust << std::endl;
+                }
+                int count = 1;
+                for (int j = entries; j > 0; j--) {
+                    if(count < 10) {
+                        std::cout << " " << std::setw(2) << std::left  << count;
+                    }else{
+                        std::cout << " " << count;
                     }
-                }
-                for (int k = 0; k < column_count; ++k) {
-                    PriceData* data = s->getPriceData()[k];
-                    if(height < data->getHigh()){
-                        height = data->getHigh();
-                    }
-                }
-
-                column_count = column_count + 2;
-                height = height + 2;
-                int count_down = height + 2;
-
-                char** myarray = new char*[height];
-                for(int i = 0; i < height; i++) {
-                    myarray[i] = new char[column_count];
-                }
-
-                for (int j = 0; j < height; ++j) {
-                    myarray[j][0] =  count_down;
-                    count_down -- ;
-                }
-
-
-
-                for (int j = 0; j < column_count; ++j) {
-                    char a = j - '0';
-                    myarray[0][j] = a;
-
-                }
-
-                for (int j = 0; j < height; ++j) {
-                    myarray[j][1] = '|';
-                }
-                for (int j = 0; j < column_count; ++j) {
-                    myarray[1][j] = '_';
-                }
-
-
-
-                for (int l = 0; l < height; ++l) {
-                    for (int i = 0; i < column_count; ++i) {
-                        std::cout << &myarray[l][i];
-                    }
-                    std::cout << std::endl;
+                    count ++;
                 }
 
 
