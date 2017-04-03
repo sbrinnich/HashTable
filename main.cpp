@@ -80,7 +80,7 @@ int main() {
                 table_codes->remove(s->getMemberCode(), HashTable::HASH_BY_CODE);
                 std::cout << name << " successfully removed!" << std::endl;
             }else{
-                std::cout << "Could not delete stock! (Not found)";
+                std::cout << "Could not delete stock! (Not found)" << std::endl;
             }
         }else if(in.compare("4") == 0){
             // IMPORT
@@ -115,7 +115,7 @@ int main() {
                     std::cout << "No price data found" << std::endl;
                 }
             }else{
-                std::cout << "Could not find stock!";
+                std::cout << "Could not find stock!" << std::endl;
             }
         }else if(in.compare("5") == 0){
             // PLOT
@@ -162,11 +162,8 @@ int main() {
                 };
                 plot_numbers(std::vector <int>{0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3});
                 plot_numbers(std::vector <int>{1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0});
-
-
-
             }else{
-                std::cout << "Could not find stock!";
+                std::cout << "Could not find stock!" << std::endl;
             }
         }else if(in.compare("6") == 0){
             // SAVE
