@@ -68,13 +68,13 @@ void Stock::import_price_data(std::string filepath) {
         getline(datei, close, ',');
         getline(datei, volume, ',');
         getline(datei, adj_close, '\n');
-        std::stringstream open_s(open);                      //erzeuge stringstreams aus allen eingelesenen Daten um sie in doubles/ints konvertieren zu können.
+        std::stringstream open_s(open);                      /// erzeuge stringstreams aus allen eingelesenen Daten um sie in doubles/ints konvertieren zu können.
         std::stringstream high_s(high);
         std::stringstream low_s(low);
         std::stringstream close_s(close);
         std::stringstream volume_s(volume);
         std::stringstream adj_close_s(adj_close);
-        open_s >> open_d;                                    //konvertiere stringstreams in korrektes dateiformat
+        open_s >> open_d;                                    /// konvertiere stringstreams in korrektes dateiformat
         high_s >> high_d;
         low_s >> low_d;
         close_s >> close_d;

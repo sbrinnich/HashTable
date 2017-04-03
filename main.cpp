@@ -98,7 +98,61 @@ int main() {
             std::cin >> name;
             Stock* s = searchStock(name, table_names, table_codes);
             if(s != nullptr) {
-                //TODO: plot
+                int temp_price = 0;
+                int column_count = 0;
+                int height = 0;
+                for (int i = 0; i < 30; i++){
+                    if(s->getPriceData()[i] != nullptr){
+                        column_count ++;
+                    }
+                }
+                for (int k = 0; k < column_count; ++k) {
+                    PriceData* data = s->getPriceData()[k];
+                    if(height < data->getHigh()){
+                        height = data->getHigh();
+                    }
+                }
+
+                column_count = column_count + 2;
+                height = height + 2;
+                int count_down = height + 2;
+
+                char** myarray = new char*[height];
+                for(int i = 0; i < height; i++) {
+                    myarray[i] = new char[column_count];
+                }
+
+                for (int j = 0; j < height; ++j) {
+                    myarray[j][0] =  count_down;
+                    count_down -- ;
+                }
+
+
+
+                for (int j = 0; j < column_count; ++j) {
+                    char a = j - '0';
+                    myarray[0][j] = a;
+
+                }
+
+                for (int j = 0; j < height; ++j) {
+                    myarray[j][1] = '|';
+                }
+                for (int j = 0; j < column_count; ++j) {
+                    myarray[1][j] = '_';
+                }
+
+
+
+                for (int l = 0; l < height; ++l) {
+                    for (int i = 0; i < column_count; ++i) {
+                        std::cout << &myarray[l][i];
+                    }
+                    std::cout << std::endl;
+                }
+
+
+
             }else{
                 std::cout << "Could not find stock!";
             }
