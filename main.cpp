@@ -108,7 +108,7 @@ int main() {
                 PriceData* data = nullptr;
                 for (int i = 0; i < entries; ++i) {
                     data = s->getPriceData()[i];
-                    if (data)
+                    if (data != nullptr)
                         max = std::max(max, data->getHigh());
                 }
                 //
@@ -127,14 +127,14 @@ int main() {
                             std::cout << "   ";
                     std::cout << " " << j*adjust << std::endl;
                 }
-                int count = 1;
+                int count = 30;
                 for (int j = entries; j > 0; j--) {
                     if(count < 10) {
                         std::cout << " " << std::setw(2) << std::left  << count;
                     }else{
                         std::cout << " " << count;
                     }
-                    count ++;
+                    count --;
                 }
 
 
