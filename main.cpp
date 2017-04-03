@@ -23,6 +23,7 @@ Stock* searchStock(std::string name, HashTable* table_names, HashTable* table_co
 }
 
 void printMenuInfo(){
+    std::cout << "\n\n";
     std::cout << "==============================" << std::endl;
     std::cout << "1 ... Add stock" << std::endl;
     std::cout << "2 ... Search stock" << std::endl;
