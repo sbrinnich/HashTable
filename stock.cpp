@@ -57,24 +57,29 @@ void Stock::import_price_data(std::string filepath) {
     std::string date, open, high, low, close, volume, adj_close;
     double open_d, high_d, low_d, close_d, adj_close_d;
     int volume_d;
-    std::ifstream datei;                                    //erzeuge ifstream
-    datei.open(filepath, std::ios::in);                     //öffne date mit übergebenen dateipfad
-    getline(datei, date, '\n');                             //Lese erste Zeile aus
+    std::ifstream datei;
+    //open file with correct Filepath of Input
+    datei.open(filepath, std::ios::in);
+    //read first line without values to get to second line
+    getline(datei, date, '\n');
     for (int i = 0; i < 30 && i < line_numbers-1; ++i) {
-        getline(datei, date, ',');                          // übertrage die Daten in der richtigen Reihenfolge auf die erzeugten strings
+        //read the line of the file and get the values into the correct variables
+        getline(datei, date, ',');
         getline(datei, open, ',');
         getline(datei, high, ',');
         getline(datei, low, ',');
         getline(datei, close, ',');
         getline(datei, volume, ',');
         getline(datei, adj_close, '\n');
-        std::stringstream open_s(open);                      /// erzeuge stringstreams aus allen eingelesenen Daten um sie in doubles/ints konvertieren zu können.
+        //prepare stringstreams to get the values from string into double
+        std::stringstream open_s(open);
         std::stringstream high_s(high);
         std::stringstream low_s(low);
         std::stringstream close_s(close);
         std::stringstream volume_s(volume);
         std::stringstream adj_close_s(adj_close);
-        open_s >> open_d;                                    /// konvertiere stringstreams in korrektes dateiformat
+        //convert stringstreams in doubles
+        open_s >> open_d;
         high_s >> high_d;
         low_s >> low_d;
         close_s >> close_d;

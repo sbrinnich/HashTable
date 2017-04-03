@@ -100,24 +100,28 @@ int main() {
             std::cout << "Name/Member Code: ";
             std::cin >> name;
             Stock* s = searchStock(name, table_names, table_codes);
+            //check if the stock from input is available
             if(s != nullptr) {
+                //define the size of the Plotting window
                 constexpr size_t entries = 30;
                 constexpr size_t steps   = 25;
+                //the array/vector to put the values of the stock in it
                 std::array<int, entries> arr;
                 double max = 0;
                 PriceData* data = nullptr;
+                //get the max value of the chosen stock
                 for (int i = 0; i < entries; ++i) {
                     data = s->getPriceData()[i];
                     if (data != nullptr)
                         max = std::max(max, data->getHigh());
                 }
-                //
+                //write every value of the last 30 days in the correct position of the array/vector
                 auto adjust = max / steps;
                 for (int i = 0; i < entries; ++i) {
                     data = s->getPriceData()[i];
                     arr[i] = (data != nullptr) ? data->getHigh() / adjust : 0;
                 }
-                // plot
+                // plot the graph of the stock
                 std::cout << "\n" << std::endl; // clear new line...
                 for (int j = steps; j > 0; j--) {
                     for (int i = 0; i < entries; ++i)
@@ -127,23 +131,14 @@ int main() {
                             std::cout << " ";
                     std::cout << " " << j*adjust << std::endl;
                 }
-                /**
-                int count = 30;
-                for (int j = entries; j > 0; j--) {
-                    if(count < 10) {
-                        std::cout << " " << std::setw(2) << std::left  << count;
-                    }else{
-                        std::cout << " " << count;
-                    }
-                    count --;
-                }
-                 **/
+
+                //function to add the correct numbers of day in under my plotted graph
                 auto plot_numbers = [&](const std::vector<int>& in) {
                     for (auto& i : in) std::cout << i;
                     std::cout << std::endl;
                 };
-                plot_numbers({0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3});
-                plot_numbers({1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0});
+                plot_numbers(std::vector <int>{0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3});
+                plot_numbers(std::vector <int>{1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0});
 
 
 

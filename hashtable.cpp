@@ -44,18 +44,22 @@ void HashTable::add(Stock* stock, int hash_by) {
     }else{
         hashed = hash(stock->getMemberCode());
     }
+    //look in the list if the hashed position for stock is empty
     if(stocks[hashed] == nullptr){
         stocks[hashed] = stock;
     }else{
+        //if not empty start the search algorithm for empty position
         int plus = 1;
         int next_pos = 0;
         for(int i = 1; i <= array_size;){
             int x = (int)pow(i,2);
+            //function to take the numbers of square always negative and positive
             if(!plus){
                 x = (-1) * x;
                 i++;
             }
             plus = (plus+1)%2;
+            //calculation to get the correct value always as a positive integer
             next_pos = ((hashed+x)% array_size + array_size) % array_size ;
             if(stocks[next_pos] == nullptr){
                 stocks[next_pos] = stock;
@@ -67,6 +71,7 @@ void HashTable::add(Stock* stock, int hash_by) {
 
 void HashTable::remove(std::string name, int hash_by) {
     int hashed = hash(name);
+    //look in the list if correct stock from the input is on the hashed position
     if((hash_by == HASH_BY_NAME && stocks[hashed] != nullptr && stocks[hashed]->getName() == name) ||
             (hash_by == HASH_BY_CODE && stocks[hashed] != nullptr && stocks[hashed]->getMemberCode() == name)){
         delete stocks[hashed];
@@ -76,11 +81,13 @@ void HashTable::remove(std::string name, int hash_by) {
         int next_pos = 0;
         for(int i = 1; i <= array_size;){
             int x = (int)pow(i,2);
+            //function to take the numbers of square always negative and positive
             if(!plus){
                 x = (-1) * x;
                 i++;
             }
             plus = (plus+1)%2;
+            //calculation to get the correct value always as a positive integer
             next_pos = ((hashed+x) % array_size + array_size) % array_size ;
             if((hash_by == HASH_BY_NAME && stocks[next_pos] != nullptr && stocks[next_pos]->getName() == name) ||
                     (hash_by == HASH_BY_CODE && stocks[next_pos] != nullptr && stocks[next_pos]->getMemberCode() == name)){
@@ -94,19 +101,23 @@ void HashTable::remove(std::string name, int hash_by) {
 
 Stock* HashTable::search(std::string name, int hash_by) {
     int hashed = hash(name);
+    //look in the list if correct stock from the input is on the hashed position
     if((hash_by == HASH_BY_NAME && stocks[hashed] != nullptr && stocks[hashed]->getName() == name) ||
        (hash_by == HASH_BY_CODE && stocks[hashed] != nullptr && stocks[hashed]->getMemberCode() == name)){
         return stocks[hashed];
     }else{
+        //if not on the hashed position start with the search algorithm
         int plus = 1;
         int next_pos = 0;
         for(int i = 1; i <= array_size;){
             int x = (int)pow(i,2);
+            //function to take the numbers of square always negative and positive
             if(!plus){
                 x = (-1) * x;
                 i++;
             }
             plus = (plus+1)%2;
+            //calculation to get the correct value always as a positive integer
             next_pos = ((hashed+x) % array_size + array_size) % array_size ;
             if(hash_by == HASH_BY_NAME && stocks[next_pos] != nullptr && stocks[next_pos]->getName() == name ||
                hash_by == HASH_BY_CODE && stocks[next_pos] != nullptr && stocks[next_pos]->getMemberCode() == name){
