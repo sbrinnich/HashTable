@@ -16,7 +16,6 @@ HashTable::~HashTable(){
             delete stocks[i];
         }
     }
-    delete[] &stocks;
 }
 
 int HashTable::hash(std::string str) {

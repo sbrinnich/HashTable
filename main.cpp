@@ -66,9 +66,10 @@ int main() {
                     fail = 0;
                 }
             }while(fail);
-            Stock *stock = new Stock(name, member_code, sin);
-            table_names->add(stock, HashTable::HASH_BY_NAME);
-            table_codes->add(stock, HashTable::HASH_BY_CODE);
+            Stock *stock1 = new Stock(name, member_code, sin);
+            Stock *stock2 = new Stock(name, member_code, sin);
+            table_names->add(stock1, HashTable::HASH_BY_NAME);
+            table_codes->add(stock2, HashTable::HASH_BY_CODE);
         }else if(in.compare("3") == 0){
             // DELETE
             std::string name;
