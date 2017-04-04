@@ -54,6 +54,7 @@ Stock::~Stock() {
             delete price_data[i];
         }
     }
+    delete[] &price_data;
 }
 
 void Stock::import_price_data(std::string filepath) {
