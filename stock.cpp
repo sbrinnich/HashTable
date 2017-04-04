@@ -48,6 +48,15 @@ Stock::Stock() {
     sin = -1;
 }
 
+Stock::~Stock() {
+    for(int i = 0; i < 30; i++){
+        if(price_data[i] != nullptr){
+            delete price_data[i];
+        }
+    }
+    delete[] price_data;
+}
+
 void Stock::import_price_data(std::string filepath) {
     std::ifstream file(filepath, std::ios::in);
     std::string line;

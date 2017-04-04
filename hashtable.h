@@ -19,6 +19,10 @@ public:
      */
     HashTable();
     /**
+     * Removes a HashTable
+     */
+    ~HashTable();
+    /**
      * Hash function, which creates an integer value from a string
      * @param str string to be hashed
      * @return an integer value representing a hashed value of the given string

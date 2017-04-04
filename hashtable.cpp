@@ -10,6 +10,15 @@ HashTable::HashTable() {
     }
 }
 
+HashTable::~HashTable(){
+    for(int i = 0; i < array_size; i++){
+        if(stocks[i] != nullptr){
+            delete stocks[i];
+        }
+    }
+    delete[] stocks;
+}
+
 int HashTable::hash(std::string str) {
     int intLength = str.length() / 4;
     long sum = 0;

@@ -74,7 +74,7 @@ public:
     /**
      * Creates an empty stock
      */
-     Stock();
+    Stock();
     /**
      * Creates a new stock
      * @param name Stock name
@@ -82,6 +82,10 @@ public:
      * @param sin Security Identification Number
      */
     Stock(std::string name, std::string member_code, int sin);
+    /**
+     * Removes a stock
+     */
+    ~Stock();
     /**
      * Import price data of last 30 days from a csv file
      * @param filepath path to csv file (including filename + ending)

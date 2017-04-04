@@ -181,6 +181,8 @@ int main() {
     }
 
     std::cout << "Exiting program..." << std::endl;
+    delete table_names;
+    delete table_codes;
     std::cout << "Good Bye!" << std::endl;
 
     return 0;
